@@ -11,7 +11,7 @@ API para gerenciamento de agendamentos, permitindo que usuários criem e gerenci
 ### 1️⃣ Clonar o Repositório
 
 ```sh
-git clone git@github.com:kairos-team/api-agenda-kairos.git
+git clone git@github.com:kairos-team/api-timely.git
 ```
 
 ### 2️⃣ Verificar a Versão do Node.js
