@@ -1,6 +1,7 @@
 import UserRepository from '../repositories/UserRepository';
 import { IUser } from '../models/UserModel';
 import AppError from '../utils/AppError';
+import bcrypt from 'bcryptjs'
 
 class UserService {
   async getUserEmail(email: string): Promise<IUser> {
@@ -16,8 +17,10 @@ class UserService {
     if (existingUser) {
       throw new AppError(`A user with the email ${email} already exists`, 409);
     }
+    
+    const userPassword = await bcrypt.hash(password, 10);
 
-    return await UserRepository.createUser({ name, email, password });
+    return await UserRepository.createUser({ name, email, password: userPassword });
   }
 
 }
