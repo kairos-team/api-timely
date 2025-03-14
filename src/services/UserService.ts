@@ -12,15 +12,23 @@ class UserService {
     return user;
   }
 
-  async createUser(name: string, email: string, password: string): Promise<IUser> {
-    const existingUser = await UserRepository.findByEmail(email);
+  async createUser(payload: IUser): Promise<IUser> {
+    const existingUser = await UserRepository.findByEmail(payload.email);
     if (existingUser) {
-      throw new AppError(`A user with the email ${email} already exists`, 409);
+      throw new AppError(`A user with the email ${payload.email} already exists`, 409);
     }
-    
-    const userPassword = await bcrypt.hash(password, 10);
 
-    return await UserRepository.createUser({ name, email, password: userPassword });
+    let hashedPassword = undefined;
+    if (payload.password) {
+      hashedPassword = await bcrypt.hash(payload.password, 10);
+    }
+
+    const newUser = await UserRepository.createUser({
+      ...payload,
+      password: hashedPassword,
+    });
+
+    return newUser;
   }
 
 }

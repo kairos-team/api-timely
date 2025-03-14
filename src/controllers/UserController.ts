@@ -5,8 +5,7 @@ import ApiResponseHandler from '@utils/ApiResponseHandler';
 class UserController {
   async createUser(req: Request, res: Response, next: NextFunction) {
     try {
-      const { name, email, password } = req.body;
-      const newUser = await UserService.createUser(name, email, password);
+      const newUser = await UserService.createUser(req.body);
       ApiResponseHandler.success(res, newUser, 201)
     } catch (error) {
       next(error)
