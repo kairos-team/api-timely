@@ -11,7 +11,7 @@ class AuthService {
       throw new AppError('User Not Found', 404);
     }
 
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    const isPasswordMatch = await bcrypt.compare(password, user.password as string);
     if(!isPasswordMatch){
       throw new AppError('Senha incorreta. Verifique e tente novamente.', 404);
     }
