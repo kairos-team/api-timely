@@ -9,6 +9,10 @@ class UserRepository {
     return await UserModel.findOne({ email });
   }
 
+  async listUsers(): Promise<IUser[]> {
+    return await UserModel.find();
+  }
+
 }
 
 export default new UserRepository();
