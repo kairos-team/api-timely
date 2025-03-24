@@ -1,20 +1,19 @@
-import CompanyModel, {ICompany} from "@models/CompanyModel";
-import mongoose from "mongoose";
+import CompanyModel, { ICompany } from "@models/CompanyModel";
 
 class CompanyRepository {
-  async createCompany(data: Partial<ICompany>): Promise<ICompany> {
+  async createCompany(data: ICompany): Promise<ICompany> {
     return await CompanyModel.create(data);
   }
 
-  async findCompanyByOwnerId(ownerId: mongoose.Types.ObjectId): Promise<ICompany | null> {
-    return await CompanyModel.findOne({ ownerId })
+  async findCompanyById(_id: string): Promise<ICompany | null> {
+    return await CompanyModel.findById({ _id })
   }
 
-  async deleteCompanyByCompanyId(companyId: mongoose.Types.ObjectId): Promise<ICompany | null> {
-    return await CompanyModel.findOneAndDelete(companyId)
+  async deleteCompanyById(_id: string): Promise<ICompany | null> {
+    return await CompanyModel.findByIdAndDelete({ _id })
   }
 
-  async findCompanies(): Promise<ICompany[]> {
+  async listCompanies(): Promise<ICompany[]> {
     return await CompanyModel.find()
   }
 
