@@ -1,7 +1,7 @@
-import UserRepository from '../repositories/UserRepository';
-import { IUser } from '../models/UserModel';
-import AppError from '../utils/AppError';
 import bcrypt from 'bcryptjs'
+import AppError from '../utils/AppError';
+import { IUser } from '../models/UserModel';
+import UserRepository from '../repositories/UserRepository';
 
 class UserService {
   async getUserEmail(email: string): Promise<IUser> {
@@ -13,8 +13,8 @@ class UserService {
   }
 
   async createUser(payload: IUser): Promise<IUser> {
-    const existingUser = await UserRepository.findByEmail(payload.email);
-    if (existingUser) {
+    const user = await UserRepository.findByEmail(payload.email);
+    if (user) {
       throw new AppError(`A user with the email ${payload.email} already exists`, 409);
     }
 
