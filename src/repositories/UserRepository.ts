@@ -9,6 +9,13 @@ class UserRepository {
     return await UserModel.findOne({ email });
   }
 
+  async listUsers(): Promise<IUser[]> {
+    return await UserModel.find();
+  }
+
+  async deleteUserById(_id: string): Promise<IUser | null> {
+    return await UserModel.findByIdAndDelete({ _id })
+  }
 }
 
 export default new UserRepository();
