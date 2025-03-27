@@ -21,6 +21,45 @@ class UserController {
       next(error);
     }
   }
+
+  async findById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const user = await UserService.findById(id);
+      ApiResponseHandler.success(res, user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateUserById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const user = await UserService.updateUserById(id, req.body);
+      ApiResponseHandler.success(res, user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteUserById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const user = await UserService.deleteUserById(id);
+      ApiResponseHandler.success(res, user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async listUsers(req: Request, res: Response, next: NextFunction) {
+    try {
+      const users = await UserService.listUsers();
+      ApiResponseHandler.success(res, users);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new UserController();

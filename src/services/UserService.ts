@@ -31,6 +31,32 @@ class UserService {
     return newUser;
   }
 
+  async findById(_id: string): Promise<IUser | null> {
+    return await UserRepository.findById(_id);
+  }
+
+  async updateUserById(_id: string, data: Partial<IUser>): Promise<void> {
+    const user = await UserRepository.findById(_id);
+    if (!user) {
+      throw new AppError('Usuário não encontrado!', 404);
+    }
+
+    await UserRepository.updateUserById(_id, data);
+  }
+
+  async deleteUserById(_id: string): Promise<void> {
+    const user = await UserRepository.findById(_id);
+    if (!user) {
+      throw new AppError('Usuário não encontrado!', 404);
+    }
+
+    await UserRepository.deleteUserById(_id);
+  }
+
+  async listUsers(): Promise<IUser[]> {
+    return await UserRepository.listUsers();
+  }
+
 }
 
 export default new UserService();
