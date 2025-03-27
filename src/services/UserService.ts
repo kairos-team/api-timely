@@ -7,7 +7,7 @@ class UserService {
   async getUserEmail(email: string): Promise<IUser> {
     const user = await UserRepository.findByEmail(email);
     if (!user) {
-      throw new AppError('User Not Found', 404);
+      throw new AppError('Usuário não encontrado!', 404);
     }
     return user;
   }
@@ -15,7 +15,7 @@ class UserService {
   async createUser(payload: IUser): Promise<IUser> {
     const user = await UserRepository.findByEmail(payload.email);
     if (user) {
-      throw new AppError(`A user with the email ${payload.email} already exists`, 409);
+      throw new AppError(`Um usuário com esse email: ${payload.email} já existe!`, 409);
     }
 
     let hashedPassword = undefined;
