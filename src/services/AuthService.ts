@@ -8,7 +8,7 @@ class AuthService {
   async login(email: string, password: string){
     const user = await UserRepository.findByEmail(email);
     if(!user){
-      throw new AppError('User Not Found', 404);
+      throw new AppError('Usuário não encontrado!', 404);
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password as string);
