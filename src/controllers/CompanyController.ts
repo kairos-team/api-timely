@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import CompanyService from "@services/CompanyService";
 import ApiResponseHandler from "@utils/ApiResponseHandler";
 
-
 class CompanyController {
   async createCompany(req: Request, res: Response, next: NextFunction) {
     try {
@@ -23,21 +22,11 @@ class CompanyController {
     }
   }
 
-  async updateCompanyById(req: Request, res: Response, next: NextFunction) {
-    try {
-      const { id } = req.params;
-      const company = await CompanyService.updateCompanyById(id, req.body);
-      ApiResponseHandler.success(res, company);
-    } catch (error) {
-      next(error);
-    }
-  }
-
   async deleteCompanyById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const company = await CompanyService.deleteCompanyById(id);
-      ApiResponseHandler.success(res, company);
+      const deletedCompany = await CompanyService.deleteCompanyById(id);
+      ApiResponseHandler.success(res, deletedCompany);
     } catch (error) {
       next(error);
     }
@@ -45,13 +34,24 @@ class CompanyController {
 
   async listCompanies(req: Request, res: Response, next: NextFunction) {
     try {
-      const companies = await CompanyService.listCompanies()
+      const companies = await CompanyService.listCompanies();
       ApiResponseHandler.success(res, companies);
     } catch (error) {
       next(error);
     }
   }
 
+  async updateCompanyById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const data = req.body;
+
+      const updatedCompany = await CompanyService.updateCompanyById(id, data);
+      ApiResponseHandler.success(res, updatedCompany);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new CompanyController();
