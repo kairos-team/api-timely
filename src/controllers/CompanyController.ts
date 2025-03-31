@@ -45,7 +45,7 @@ class CompanyController {
 
   async listCompanies(req: Request, res: Response, next: NextFunction) {
     try {
-      const companies = await CompanyService.listCompanies()
+      const companies = await CompanyService.listCompanies();
       ApiResponseHandler.success(res, companies);
     } catch (error) {
       next(error);
