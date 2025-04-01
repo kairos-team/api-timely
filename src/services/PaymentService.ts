@@ -5,7 +5,7 @@ import AppError from "@utils/AppError";
 
 class PaymentService {
     async createPayment(data: IPayment): Promise<IPayment> {
-        const company = await CompanyRepository.findById(String(data.companyid))
+        const company = await CompanyRepository.findCompanyById(String(data.companyid))
         if (!company) {
             throw new AppError('Empresa não encontrado!', 404);
         }
