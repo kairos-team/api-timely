@@ -7,7 +7,7 @@ class PaymentService {
     async createPayment(data: IPayment): Promise<IPayment> {
         const company = await CompanyRepository.findById(String(data.companyid))
         if (!company) {
-            throw new AppError('Usuário não encontrado!', 404);
+            throw new AppError('Empresa não encontrado!', 404);
         }
 
         const newPayment = await PaymentRepository.createPayment(data)
