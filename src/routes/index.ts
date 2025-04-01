@@ -10,6 +10,6 @@ const router = Router();
 router.use('/users', UserRouter);
 router.use('/auth', AuthRouter);
 router.use('/company', CompanyRouter);
-router.use('payment', PaymentRouter);
+router.use('/payment', PaymentRouter);
 
 export default router;
