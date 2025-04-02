@@ -21,7 +21,7 @@ const PaymentSchema = new Schema<IPayment>(
         colaborators: [{type: mongoose.Schema.Types.ObjectId, ref: "User", require: true}],
         amount: {type: Number, required: true},
         date: { type: Date, required: true},
-        status: { type: String, enum: Object.values(PaymentStatus), default: PaymentStatus.PENDING,},         
+        status: { type: String, enum: Object.values(PaymentStatus), default: PaymentStatus.PENDING},         
     },
     {timestamps: true, versionKey: false}
 );
