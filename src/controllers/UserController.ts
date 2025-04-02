@@ -22,10 +22,10 @@ class UserController {
     }
   }
 
-  async findById(req: Request, res: Response, next: NextFunction) {
+  async findUserById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const user = await UserService.findById(id);
+      const user = await UserService.findUserById(id);
       ApiResponseHandler.success(res, user);
     } catch (error) {
       next(error);

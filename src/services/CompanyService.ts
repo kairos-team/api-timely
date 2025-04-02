@@ -5,7 +5,7 @@ import UserRepository from "@repositories/UserRepository";
 
 class CompanyService {
   async createCompany(data: ICompany): Promise<ICompany> {
-    const user = await UserRepository.findById(String(data.ownerId))
+    const user = await UserRepository.findUserById(String(data.ownerId))
     if (!user) {
       throw new AppError('Usuário não encontrado!', 404);
     }
