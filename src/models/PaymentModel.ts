@@ -3,7 +3,7 @@ import mongoose, {Schema, Document} from "mongoose";
 export enum PaymentStatus{
     PENDING = "PENDING",
     COMPLETED = "COMPLETED",
-    FAILED  = "FAILED"
+    FAILED  = "FAILED",
 }
  
 export interface IPayment extends Document{
@@ -21,7 +21,7 @@ const PaymentSchema = new Schema<IPayment>(
         colaborators: [{type: mongoose.Schema.Types.ObjectId, ref: "User", require: true}],
         amount: {type: Number, required: true},
         date: { type: Date, required: true},
-        status: { type: String, enum: Object.values(PaymentStatus), default: PaymentStatus.PENDING}         
+        status: { type: String, enum: Object.values(PaymentStatus), default: PaymentStatus.PENDING},         
     },
     {timestamps: true, versionKey: false}
 );
