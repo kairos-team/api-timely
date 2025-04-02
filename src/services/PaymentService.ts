@@ -1,3 +1,4 @@
+import { IPayment } from "@models/PaymentModel";
 import CompanyRepository from "@repositories/CompanyRepository";
 import PaymentRepository from "@repositories/PaymentRepository";
 import AppError from "@utils/AppError";
@@ -5,7 +6,7 @@ import AppError from "@utils/AppError";
 
 class PaymentService {
   async createPayment(data: IPayment): Promise<IPayment> {
-    const company = await CompanyRepository.findCompanyById(String(data.companyid))
+    const company = await CompanyRepository.findCompanyById(String(data.companyId))
     if (!company) {
       throw new AppError('Empresa não encontrada!', 404);
     }
