@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from "express";
-import PaymentMethodService from "@services/PaymentMethodSevice"
+import PaymentMethodService from "@services/PaymentMethodService";
 import ApiResponseHandler from "@utils/ApiResponseHandler";
 
 class PaymentMethodController{
