@@ -13,7 +13,7 @@ class AppointmentRepository {
     return await AppointmentsModel.findByIdAndUpdate({ _id }, data, { new: true });
   }
 
-  async deleteCompanyById(_id: string): Promise<IAppointments | null> {
+  async deleteAppointmentById(_id: string): Promise<IAppointments | null> {
     return await AppointmentsModel.findByIdAndDelete({ _id });
   }
 
