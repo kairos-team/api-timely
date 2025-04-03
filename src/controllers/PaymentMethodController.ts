@@ -1,11 +1,11 @@
 import {Request, Response, NextFunction} from "express";
-import PaymentMethodSevice from "@services/PaymentMethodService";
+import PaymentMethodService from "@services/PaymentMethodSevice"
 import ApiResponseHandler from "@utils/ApiResponseHandler";
 
 class PaymentMethodController{
     async createPaymentMethod(req: Request, res: Response, next: NextFunction){
         try{
-            const newPaymentMethod = await PaymentMethodSevice.createPaymentMethod(req.body);
+            const newPaymentMethod = await PaymentMethodService.createPaymentMethod(req.body);
             ApiResponseHandler.success(res, newPaymentMethod, 201);
         } catch (error){
             next(error);
@@ -16,7 +16,7 @@ class PaymentMethodController{
     async findPaymentMethodById(req: Request, res: Response, next: NextFunction){
         try{
             const {id} = req.params;
-            const paymentMethod = await PaymentMethodSevice.findPaymentMethodById(id);
+            const paymentMethod = await PaymentMethodService.findPaymentMethodById(id);
             ApiResponseHandler.success(res, paymentMethod);
         } catch (error){
             next(error);
@@ -27,7 +27,7 @@ class PaymentMethodController{
         try{
             const {id} = req.params;
             const paymentMethod = req.body.paymentMethod;
-            const payment = await PaymentMethodSevice.updatePaymentMethodById(id, paymentMethod);
+            const payment = await PaymentMethodService.updatePaymentMethodById(id, paymentMethod);
             ApiResponseHandler.success(res, payment);
         } catch (error){
             next(error);
@@ -37,7 +37,7 @@ class PaymentMethodController{
     async deletePaymentMethodById(req: Request, res: Response, next: NextFunction){
         try{
             const {id} = req.params;
-            const payment = await PaymentMethodSevice.deletePaymentMethodById(id);
+            const payment = await PaymentMethodService.deletePaymentMethodById(id);
             ApiResponseHandler.success(res, payment);
         } catch (error){
             next(error);
