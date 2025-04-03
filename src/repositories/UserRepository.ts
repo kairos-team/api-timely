@@ -9,7 +9,7 @@ class UserRepository {
     return await UserModel.findOne({ email });
   }
 
-  async findById(_id: string): Promise<IUser | null> {
+  async findUserById(_id: string): Promise<IUser | null> {
     return await UserModel.findById({ _id });
   }
 

@@ -31,12 +31,12 @@ class UserService {
     return newUser;
   }
 
-  async findById(_id: string): Promise<IUser | null> {
-    return await UserRepository.findById(_id);
+  async findUserById(_id: string): Promise<IUser | null> {
+    return await UserRepository.findUserById(_id);
   }
 
   async updateUserById(_id: string, data: Partial<IUser>): Promise<void> {
-    const user = await UserRepository.findById(_id);
+    const user = await UserRepository.findUserById(_id);
     if (!user) {
       throw new AppError('Usuário não encontrado!', 404);
     }
@@ -45,7 +45,7 @@ class UserService {
   }
 
   async deleteUserById(_id: string): Promise<void> {
-    const user = await UserRepository.findById(_id);
+    const user = await UserRepository.findUserById(_id);
     if (!user) {
       throw new AppError('Usuário não encontrado!', 404);
     }
