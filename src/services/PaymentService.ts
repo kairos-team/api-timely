@@ -20,19 +20,18 @@ class PaymentService {
   }
 
   async updatePaymentById(_id: string, data: Partial<IPayment>): Promise<void> {
-    const company = await CompanyRepository.findCompanyById(_id)
-    if (!company) {
-      throw new AppError('Empresa não encontrada!', 404);
+    const payment = await PaymentRepository.findPaymentById(_id);
+    if (!payment) {
+      throw new AppError('Pagamento não encontrado!', 404);
     }
     await PaymentRepository.updatePaymentById(_id, data);
   }
 
   async deletePaymentById(_id: string): Promise<void> {
-    const company = await CompanyRepository.findCompanyById(_id)
-    if (!company) {
-      throw new AppError('Empresa não encontrada!', 404);
+    const payment = await PaymentRepository.findPaymentById(_id);
+    if (!payment) {
+      throw new AppError('Pagamento não encontrado!', 404);
     }
-
     await PaymentRepository.deletePaymentById(_id);
   }
 
