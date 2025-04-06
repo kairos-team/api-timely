@@ -6,7 +6,7 @@ class AppointmentController {
   async createAppointment(req: Request, res: Response, next: NextFunction) {
     try {
       const newAppointment = await AppointmentService.createAppointment(req.body);
-      ApiResponseHandler.success(res, newAppointment, 201);
+      return ApiResponseHandler.success(res, newAppointment, 201);
     } catch (error) {
       next(error);
     }
@@ -16,7 +16,7 @@ class AppointmentController {
     try {
       const { id } = req.params;
       const appointment = await AppointmentService.findAppointmentById(id);
-      ApiResponseHandler.success(res, appointment);
+      return ApiResponseHandler.success(res, appointment);
     } catch (error) {
       next(error);
     }
@@ -26,7 +26,7 @@ class AppointmentController {
     try {
       const { id } = req.params;
       const appointment = await AppointmentService.updateAppointmentById(id, req.body);
-      ApiResponseHandler.success(res, appointment);
+      return ApiResponseHandler.success(res, appointment);
     } catch (error) {
       next(error);
     }
@@ -36,7 +36,7 @@ class AppointmentController {
     try {
       const { id } = req.params;
       const appointment = await AppointmentService.deleteAppointmentById(id);
-      ApiResponseHandler.success(res, appointment);
+      return ApiResponseHandler.success(res, appointment);
     } catch (error) {
       next(error);
     }
@@ -45,7 +45,7 @@ class AppointmentController {
   async listAppointments(req: Request, res: Response, next: NextFunction) {
     try {
       const appointment = await AppointmentService.listAppointments();
-      ApiResponseHandler.success(res, appointment);
+      return ApiResponseHandler.success(res, appointment);
     } catch (error) {
       next(error);
     }

@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import ApiResponseHandler from '@utils/ApiResponseHandler';
+import { ErrorCodes } from 'enum/ErrorCodes';
 
 export function errorMiddleware(err: any, req: Request, res: Response, _next: NextFunction): void {
-  const status = err.statusCode || 500;
+  const status = err.statusCode || ErrorCodes.INTERNAL_SERVER_ERROR;
   const message = err.message || 'Ocorreu um erro no servidor';
   const errorDetails = err.error || err.validationErrors || null;
 
@@ -15,7 +16,7 @@ export function errorMiddleware(err: any, req: Request, res: Response, _next: Ne
 
   console.error(errorResponse);
 
-  ApiResponseHandler.error(res, message, status, errorDetails);
+  return ApiResponseHandler.error(res, message, status, errorDetails);
 }
 
 export default errorMiddleware;

@@ -1,3 +1,5 @@
+import { ErrorCodes } from "enum/ErrorCodes";
+
 class AppError extends Error {
   public statusCode: number;
   public validationErrors?: string[];

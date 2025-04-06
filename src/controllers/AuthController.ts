@@ -7,7 +7,7 @@ class AuthController {
     try {
       const { email, password } = req.body;
       const token = await AuthService.login(email, password)
-      ApiResponseHandler.success(res, token, 200)
+      return ApiResponseHandler.success(res, token, 200)
     } catch (error) {
       next(error)
     }

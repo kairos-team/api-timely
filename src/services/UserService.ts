@@ -2,12 +2,13 @@ import bcrypt from 'bcryptjs'
 import AppError from '../utils/AppError';
 import { IUser } from '../models/UserModel';
 import UserRepository from '../repositories/UserRepository';
+import { ErrorCodes } from 'enum/ErrorCodes';
 
 class UserService {
   async getUserEmail(email: string): Promise<IUser> {
     const user = await UserRepository.findByEmail(email);
     if (!user) {
-      throw new AppError('Usuário não encontrado!', 404);
+      throw new AppError('Usuário não encontrado!', ErrorCodes.NOT_FOUND);
     }
     return user;
   }
@@ -15,7 +16,7 @@ class UserService {
   async createUser(payload: IUser): Promise<IUser> {
     const user = await UserRepository.findByEmail(payload.email);
     if (user) {
-      throw new AppError(`Um usuário com esse email: ${payload.email} já existe!`, 409);
+      throw new AppError(`Um usuário com esse email: ${payload.email} já existe!`, ErrorCodes.CONFLICT);
     }
 
     let hashedPassword = undefined;
@@ -38,7 +39,7 @@ class UserService {
   async updateUserById(_id: string, data: Partial<IUser>): Promise<void> {
     const user = await UserRepository.findUserById(_id);
     if (!user) {
-      throw new AppError('Usuário não encontrado!', 404);
+      throw new AppError('Usuário não encontrado!', ErrorCodes.NOT_FOUND);
     }
 
     await UserRepository.updateUserById(_id, data);
@@ -47,7 +48,7 @@ class UserService {
   async deleteUserById(_id: string): Promise<void> {
     const user = await UserRepository.findUserById(_id);
     if (!user) {
-      throw new AppError('Usuário não encontrado!', 404);
+      throw new AppError('Usuário não encontrado!', ErrorCodes.NOT_FOUND);
     }
 
     await UserRepository.deleteUserById(_id);

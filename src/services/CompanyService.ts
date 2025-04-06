@@ -2,12 +2,13 @@ import AppError from "@utils/AppError";
 import { ICompany } from "@models/CompanyModel";
 import CompanyRepository from "@repositories/CompanyRepository";
 import UserRepository from "@repositories/UserRepository";
+import { ErrorCodes } from "enum/ErrorCodes";
 
 class CompanyService {
   async createCompany(data: ICompany): Promise<ICompany> {
     const user = await UserRepository.findUserById(String(data.ownerId))
     if (!user) {
-      throw new AppError('Usuário não encontrado!', 404);
+      throw new AppError('Usuário não encontrado!', ErrorCodes.NOT_FOUND);
     }
 
     const newCompany = await CompanyRepository.createCompany(data)
@@ -21,7 +22,7 @@ class CompanyService {
   async updateCompanyById(_id: string, data: Partial<ICompany>): Promise<void> {
     const company = await CompanyRepository.findCompanyById(_id)
     if (!company) {
-      throw new AppError('Empresa não encontrada!', 404);
+      throw new AppError('Empresa não encontrada!', ErrorCodes.NOT_FOUND);
     }
 
     await CompanyRepository.updateCompanyById(_id, data);
@@ -30,7 +31,7 @@ class CompanyService {
   async deleteCompanyById(_id: string): Promise<void> {
     const company = await CompanyRepository.findCompanyById(_id)
     if (!company) {
-      throw new AppError('Empresa não encontrada!', 404);
+      throw new AppError('Empresa não encontrada!', ErrorCodes.NOT_FOUND);
     }
 
     await CompanyRepository.deleteCompanyById(_id);
