@@ -4,7 +4,7 @@ import ApiResponseHandler from '@utils/ApiResponseHandler';
 export function errorMiddleware(err: any, req: Request, res: Response, _next: NextFunction): void {
   const status = err.statusCode || 500;
   const message = err.message || 'Ocorreu um erro no servidor';
-  const errorDetails = err.error || null;
+  const errorDetails = err.error || err.validationErrors || null;
 
   const errorResponse = {
     status,

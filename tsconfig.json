@@ -15,7 +15,8 @@
       "@repositories/*": ["repositories/*"],
       "@services/*": ["services/*"],
       "@routes/*": ["routes/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@validators/*": ["validators/*"]
     }
   },
   "include": ["src"],
