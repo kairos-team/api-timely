@@ -6,7 +6,7 @@ class PaymentMethodController {
     async createPaymentMethod(req: Request, res: Response, next: NextFunction) {
         try {
             const newPaymentMethod = await PaymentMethodService.createPaymentMethod(req.body);
-            ApiResponseHandler.success(res, newPaymentMethod, 201);
+            return ApiResponseHandler.success(res, newPaymentMethod, 201);
         } catch (error) {
             next(error);
         }
@@ -17,7 +17,7 @@ class PaymentMethodController {
         try {
             const { id } = req.params;
             const paymentMethod = await PaymentMethodService.findPaymentMethodById(id);
-            ApiResponseHandler.success(res, paymentMethod);
+            return ApiResponseHandler.success(res, paymentMethod);
         } catch (error) {
             next(error);
         }
@@ -27,7 +27,7 @@ class PaymentMethodController {
         try {
             const { id } = req.params;
             const payment = await PaymentMethodService.updatePaymentMethodById(id, req.body);
-            ApiResponseHandler.success(res, payment);
+            return ApiResponseHandler.success(res, payment);
         } catch (error) {
             next(error);
         }
@@ -37,7 +37,7 @@ class PaymentMethodController {
         try {
             const { id } = req.params;
             const payment = await PaymentMethodService.deletePaymentMethodById(id);
-            ApiResponseHandler.success(res, payment);
+            return ApiResponseHandler.success(res, payment);
         } catch (error) {
             next(error);
         }

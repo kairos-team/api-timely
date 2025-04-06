@@ -1,4 +1,5 @@
 import AppError from "@utils/AppError";
+import { ErrorCodes } from "enum/ErrorCodes";
 import { Request, Response, NextFunction } from "express";
 import jwt from 'jsonwebtoken'
 
@@ -13,7 +14,7 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
   const SECRET = process.env.JWT_SECRET as string
 
   if (!token) {
-    throw new AppError('Token não fornecido', 401)
+    throw new AppError('Token não fornecido', ErrorCodes.UNAUTHORIZED);
   }
 
   try {
@@ -22,7 +23,7 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
 
     next();
   } catch (error) {
-    throw new AppError('Token inválido ou expirado!', 403)
+    throw new AppError('Token inválido ou expirado!', ErrorCodes.FORBIDDEN)
   }
 }
 

@@ -7,7 +7,7 @@ class PaymentController {
   async createPayment(req: Request, res: Response, next: NextFunction) {
     try {
       const newPayment = await PaymentService.createPayment(req.body);
-      ApiResponseHandler.success(res, newPayment, 201);
+      return ApiResponseHandler.success(res, newPayment, 201);
     } catch (error) {
       next(error);
     }
@@ -17,7 +17,7 @@ class PaymentController {
     try {
       const { id } = req.params;
       const payment = await PaymentService.findPaymentById(id);
-      ApiResponseHandler.success(res, payment);
+      return ApiResponseHandler.success(res, payment);
     } catch (error) {
       next(error);
     }
@@ -27,7 +27,7 @@ class PaymentController {
     try {
       const { id } = req.params;
       const payment = await PaymentService.updatePaymentById(id, req.body);
-      ApiResponseHandler.success(res, payment);
+      return ApiResponseHandler.success(res, payment);
     } catch (error) {
       next(error);
     }
@@ -37,7 +37,7 @@ class PaymentController {
     try {
       const { id } = req.params;
       const payment = await PaymentService.deletePaymentById(id);
-      ApiResponseHandler.success(res, payment);
+      return ApiResponseHandler.success(res, payment);
     } catch (error) {
       next(error);
     }
@@ -46,7 +46,7 @@ class PaymentController {
   async listPayments(req: Request, res: Response, next: NextFunction) {
     try {
       const payments = await PaymentService.listPayments();
-      ApiResponseHandler.success(res, payments);
+      return ApiResponseHandler.success(res, payments);
     } catch (error) {
       next(error);
     }

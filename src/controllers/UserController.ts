@@ -6,7 +6,7 @@ class UserController {
   async createUser(req: Request, res: Response, next: NextFunction) {
     try {
       const newUser = await UserService.createUser(req.body);
-      ApiResponseHandler.success(res, newUser, 201)
+      return ApiResponseHandler.success(res, newUser, 201)
     } catch (error) {
       next(error)
     }
@@ -16,7 +16,7 @@ class UserController {
     try {
       const { email } = req.params;
       const user = await UserService.getUserEmail(email);
-      ApiResponseHandler.success(res, user)
+      return ApiResponseHandler.success(res, user)
     } catch (error) {
       next(error);
     }
@@ -26,7 +26,7 @@ class UserController {
     try {
       const { id } = req.params;
       const user = await UserService.findUserById(id);
-      ApiResponseHandler.success(res, user);
+      return ApiResponseHandler.success(res, user);
     } catch (error) {
       next(error);
     }
@@ -36,7 +36,7 @@ class UserController {
     try {
       const { id } = req.params;
       const user = await UserService.updateUserById(id, req.body);
-      ApiResponseHandler.success(res, user);
+      return ApiResponseHandler.success(res, user);
     } catch (error) {
       next(error);
     }
@@ -46,7 +46,7 @@ class UserController {
     try {
       const { id } = req.params;
       const user = await UserService.deleteUserById(id);
-      ApiResponseHandler.success(res, user);
+      return ApiResponseHandler.success(res, user);
     } catch (error) {
       next(error);
     }
@@ -55,7 +55,7 @@ class UserController {
   async listUsers(req: Request, res: Response, next: NextFunction) {
     try {
       const users = await UserService.listUsers();
-      ApiResponseHandler.success(res, users);
+      return ApiResponseHandler.success(res, users);
     } catch (error) {
       next(error);
     }
