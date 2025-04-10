@@ -5,7 +5,7 @@ import { z } from 'zod';
 class UserValidator extends BaseValidator<IUser> {
   getRules() {
     return {
-      name: z.string().min(3, { message: 'O nome deve ter pelo menos 3 caracteres' }),
+      name: z.string().min(2, { message: 'O nome deve ter pelo menos 3 caracteres' }),
       email: z.string().email({ message: 'Email inválido' }),
       phone: z.string().optional(),
       password: z.string().optional(),
