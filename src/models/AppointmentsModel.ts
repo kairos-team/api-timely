@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface IAppointments extends Document {
   userId: mongoose.Schema.Types.ObjectId;
   professionalId: mongoose.Schema.Types.ObjectId;
+  appointmentProcedure: string;
   appointmentDate: Date;
   startTime: Date;
   endTime: Date;
@@ -13,6 +14,7 @@ const AppointmentsSchema = new Schema<IAppointments>(
   {
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     professionalId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    appointmentProcedure: {type: String},
     appointmentDate: { type: Date, required: true },
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true },
